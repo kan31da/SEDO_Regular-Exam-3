@@ -5,6 +5,10 @@ def isMainBranch() {
 pipeline {
     agent any
 
+    triggers {
+        pollSCM('* * * * *') 
+    }
+
     stages {
         stage('Restore Dependencies') {
             when { expression { isMainBranch() } }
