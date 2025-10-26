@@ -12,12 +12,21 @@ pipeline {
             }
         }
 
+        stage('Restore Dependencies') {
+            when {
+                branch 'main'
+            }
+            steps {
+                bat 'dotnet restore'
+            }
+        }
+
         stage('Build Application') {
             when {
                 branch 'main'
             }
             steps {
-                bat 'dotnet build'
+                bat 'dotnet build --no-restore'
             }
         }
 
