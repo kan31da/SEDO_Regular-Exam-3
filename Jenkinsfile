@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    triggers {       
-        pollSCM('* * * * *')
+    triggers {
+        pollSCM('* * * * *') 
     }
 
     stages {
@@ -14,7 +14,7 @@ pipeline {
 
         stage('Restore Dependencies') {
             when {
-                branch 'main'
+                expression { env.BRANCH_NAME == 'main' }
             }
             steps {
                 bat 'dotnet restore'
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Build Application') {
             when {
-                branch 'main'
+                expression { env.BRANCH_NAME == 'main' }
             }
             steps {
                 bat 'dotnet build --no-restore'
@@ -32,7 +32,7 @@ pipeline {
 
         stage('Run Unit and Integration Tests') {
             when {
-                branch 'main'
+                expression { env.BRANCH_NAME == 'main' }
             }
             steps {
                 bat 'dotnet test --no-build --verbosity normal'
