@@ -5,7 +5,6 @@ pipeline {
         pollSCM('* * * * *') 
     }
 
-
     stages {
         stage('Restore Dependencies') {
             when {
